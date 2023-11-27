@@ -81,10 +81,5 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // Post-build task
-            // Clean up or additional tasks to perform after the pipeline execution
-        }
-    }
+  
 }
