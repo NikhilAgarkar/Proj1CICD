@@ -49,7 +49,9 @@ pipeline {
                             name: docker-ce
                             state: present
                     '''
+					catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                     sh 'ansible-playbook -i "20.204.147.125," -u proj1 docker_install.yml'
+					}
                 }
             }
         }
@@ -58,12 +60,13 @@ pipeline {
             steps {
                 script {
                     // Job 3: Build and deploy PHP Docker container
-                    // Replace placeholders with actual Git repository URL
+                    catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                     sh 'git clone https://github.com/NikhilAgarkar/Proj1CICD'
                     sh 'docker build -t my_php_app .'
-                    sh 'docker tag my_php_app nikhilagarkar/my_php_app:latest'
-                    sh 'docker push nikhilagarkar/my_php_app:latest'
-                    sh 'docker run -d --name your_php_container -p 8080:80 nikhilagarkar/my_php_app:latest'
+					sh 'docker tag my_php_app nikhilagarkar/my_php_app:latest'
+					sh 'docker push nikhilagarkar/my_php_app:latest'
+					sh 'docker run -d --name your_php_container -p 8080:80 nikhilagarkar/my_php_app:latest'
+					}
                 }
             }
         }
