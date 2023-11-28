@@ -8,7 +8,7 @@ pipeline {
                     // Job 1: Install and configure puppet agent
                   
                     sh 'sudo -S apt-get update && sudo -S apt-get install -y puppet'
-                    sh 'sudo -S puppet agent --server=puppet.example.com --waitforcert=60 --test'
+                    sh 'sudo -S puppet agent --server=13.233.103.2 --waitforcert=60 --test'
                 }
             }
         }
